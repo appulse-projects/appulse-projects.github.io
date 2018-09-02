@@ -11,9 +11,9 @@ email:    appulse.io@gmail.com
 twitter_username: appulseprojects
 github_username:  appulse-projects
 header_pages:
-  - 00_get-started.md
-  - 01_advanced-usage.md
-  - 02_benchmarks.md
+  - pinned/get-started.md
+  - pinned/advanced-usage.md
+  - pinned/benchmarks.md
 
 markdown: kramdown
 
