@@ -3,7 +3,7 @@ layout: page
 title:  Advanced Usage
 ---
 
-Example:
+Example of Spring integration:
 
 ```java
 

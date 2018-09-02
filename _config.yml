@@ -1,15 +1,14 @@
 
-title:        Appulse Projects
+title: Appulse
 description: >-
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Appulse aims to build correct concurrent and
+  scalable applications based on JVM and BEAM.
 
 baseurl:  ""
 url:      https://appulse.io
-email:    xxlabaza@gmail.com
+email:    appulse.io@gmail.com
 
-twitter_username: appulse-projects
+twitter_username: appulseprojects
 github_username:  appulse-projects
 header_pages:
   - 00_get-started.md
@@ -17,6 +16,8 @@ header_pages:
   - 02_benchmarks.md
 
 markdown: kramdown
+
+# https://github.com/jekyll/minima
 theme: minima
 
 sass:
