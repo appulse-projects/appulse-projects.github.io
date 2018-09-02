@@ -1,1 +1,31 @@
-theme: jekyll-theme-minimal
+
+title:        Appulse Projects
+description: >-
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+
+baseurl:  ""
+url:      https://appulse.io
+email:    xxlabaza@gmail.com
+
+twitter_username: appulse-projects
+github_username:  appulse-projects
+header_pages:
+  - 00_get-started.md
+  - 01_advanced-usage.md
+  - 02_benchmarks.md
+
+markdown: kramdown
+theme: minima
+
+sass:
+  style: compressed
+
+plugins:
+  - jekyll-feed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
