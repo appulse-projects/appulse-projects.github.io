@@ -6,6 +6,7 @@ title:  Examples
 Talk is cheap! Show me some code!
 
 - [Receive and send back](#receive-and-send-back)
+- [Custom Mailbox queue](#custom-mailbox-queue)
 
 ## Receive and send back
 
@@ -28,8 +29,6 @@ public class Main {
         .build();
 
     Node node = Nodes.singleNode("java@localhost", config);
-
-    System.out.println("node descriptor: " + node.getDescriptor().toString());
 
     Mailbox mailbox = node.mailbox()
         .name("my_process")
@@ -55,6 +54,33 @@ public class Main {
 
     // and close the node
     node.close();
+  }
+}
+```
+
+## Custom Mailbox queue
+
+```java
+import java.util.concurrent.SynchronousQueue;
+
+import io.appulse.encon.Node;
+import io.appulse.encon.Nodes;
+import io.appulse.encon.mailbox.Mailbox;
+
+
+public class Main {
+
+  public static void main(String[] args) {
+    Node node = Nodes.singleNode("java@localhost", true);
+
+    Mailbox mailbox = node.mailbox()
+        .name("my_process")
+        // Specify your own java.util.concurrent.BlockingQueue
+        // implementation
+        .queue(new SynchronousQueue<>())
+        .build();
+
+    // ...
   }
 }
 ```
