@@ -13,7 +13,7 @@ github_username:  appulse-projects
 header_pages:
   - pinned/get-started.md
   - pinned/advanced-usage.md
-  - pinned/benchmarks.md
+  - pinned/examples.md
 
 markdown: kramdown
 
