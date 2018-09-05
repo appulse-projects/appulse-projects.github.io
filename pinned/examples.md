@@ -9,5 +9,5 @@ Talk is cheap! Show me some code!
 - [Custom Mailbox queue](https://github.com/appulse-projects/encon-java/tree/master/examples/custom-queue);
 - [Databinding](https://github.com/appulse-projects/encon-java/tree/master/examples/databind);
 - [Handler basic](https://github.com/appulse-projects/encon-java/tree/master/examples/handler-basic);
-- [Echo server](https://github.com/appulse-projects/encon-java/tree/master/examples/echo);
-- [Echo server Spring](https://github.com/appulse-projects/encon-java/tree/master/examples/echo-spring).
+- [Echo server](https://github.com/appulse-projects/encon-java/tree/master/examples/echo-server);
+- [Echo server Spring](https://github.com/appulse-projects/encon-java/tree/master/examples/echo-server-spring).
