@@ -3,7 +3,7 @@ layout: page
 title:  Advanced Usage
 ---
 
-- [Object mapping](#object-mapping)
+- [Databinding](#databinding)
   - [Databind dependency](#databind-dependency)
   - [Pojo declaration](#pojo-declaration)
   - [Serialization](#serialization)
@@ -18,7 +18,7 @@ title:  Advanced Usage
   - [Server](#server)
   - [Client](#client)
 
-## Object mapping
+## Databinding
 
 ### Databind dependency
 
@@ -422,7 +422,7 @@ class EchoServer {
 
 > **NOTICE:** `@ErlangMailbox` annotation creates an application context component, so it could be `autowired`/`injected`.
 
-> **NOTICE:** `nodes` and `mailboxes` declared in `@ErlangMailbox` annotation, but not existed in the application context, will be created and registered automatically.
+> **NOTICE:** `nodes` and `mailboxes` declared in `@ErlangMailbox` annotation, but not existed in the application context, will be created and registered automatically.у
 
 ```java
 @ErlangMailbox(
