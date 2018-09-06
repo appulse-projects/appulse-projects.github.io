@@ -31,8 +31,13 @@ Adding databind's dependency to your `JVM` app:
   ...
   <dependency>
     <groupId>io.appulse.encon</groupId>
+    <artifactId>encon</artifactId>
+    <version>1.6.2</version>
+  </dependency>
+  <dependency>
+    <groupId>io.appulse.encon</groupId>
     <artifactId>encon-databind</artifactId>
-    <version>1.6.1</version>
+    <version>1.6.2</version>
   </dependency>
   ...
 </dependencies>
@@ -41,7 +46,8 @@ Adding databind's dependency to your `JVM` app:
 **Gradle**:
 
 ```groovy
-compile 'io.appulse.encon:encon-databind:1.6.1'
+compile 'io.appulse.encon:encon:1.6.2'
+compile 'io.appulse.encon:encon-databind:1.6.2'
 ```
 
 ### Pojo declaration
@@ -132,7 +138,7 @@ Adding handler's dependency to your `JVM` app:
   <dependency>
     <groupId>io.appulse.encon</groupId>
     <artifactId>encon-handler</artifactId>
-    <version>1.6.1</version>
+    <version>1.6.2</version>
   </dependency>
   ...
 </dependencies>
@@ -141,7 +147,7 @@ Adding handler's dependency to your `JVM` app:
 **Gradle**:
 
 ```groovy
-compile 'io.appulse.encon:encon-handler:1.6.1'
+compile 'io.appulse.encon:encon-handler:1.6.2'
 ```
 
 ### Basic handler
@@ -213,6 +219,8 @@ import static io.appulse.encon.handler.message.matcher.Matchers.anyString;
 import static io.appulse.encon.handler.message.matcher.Matchers.anyInt;
 import static io.appulse.encon.handler.message.matcher.Matchers.eq;
 
+import io.appulse.encon.handler.mailbox.DefaultMailboxHandler;
+import io.appulse.encon.handler.mailbox.MailboxHandler;
 import io.appulse.encon.handler.message.MessageHandler;
 import io.appulse.encon.handler.message.matcher.MethodMatcherMessageHandler;
 
@@ -220,24 +228,30 @@ import io.appulse.encon.handler.message.matcher.MethodMatcherMessageHandler;
 MyService1 service1 = new MyService1();
 MyService2 service2 = new MyService2();
 
-MessageHandler handler = MethodMatcherMessageHandler.builder()
+MessageHandler messageHandler = MethodMatcherMessageHandler.builder()
     .wrap(service1)
         // redirects '[]' (empty list) to method MyService1.handler1
         .list(it -> it.handler1())
-        // redirects tuple {any_number, any_string, atom(false)}
+        // redirects tuple {any_number, any_string, atom(true)}
         // to MyService1.handler2
-        .tuple(it -> it.handler2(anyInt(), anyString(), eq(false)))
+        .tuple(it -> it.handler2(anyInt(), anyString(), eq(true)))
     .wrap(service2)
         // redirects {42} to MyService2.popa
-        .tuple(it -> it.popa(42))
+        .none(it -> it.handler3(42))
+    .build();
+
+MailboxHandler mailboxHandler = DefaultMailboxHandler.builder()
+    .messageHandler(messageHandler)
+    .mailbox(myMailbox)
     .build();
 
 // start it in a separate thread:
-handler.startExecutor();
+mailboxHandler.startExecutor();
+
 // ...
 
 // handler is a Closeable object
-handler.close();
+mailboxHandler.close();
 ```
 
 ## Spring
@@ -254,7 +268,7 @@ Adding Spring's dependency to your `JVM` app:
   <dependency>
     <groupId>io.appulse.encon</groupId>
     <artifactId>encon-spring</artifactId>
-    <version>1.6.1</version>
+    <version>1.6.2</version>
   </dependency>
   ...
 </dependencies>
@@ -263,7 +277,7 @@ Adding Spring's dependency to your `JVM` app:
 **Gradle**:
 
 ```groovy
-compile 'io.appulse.encon:encon-spring:1.6.1'
+compile 'io.appulse.encon:encon-spring:1.6.2'
 ```
 
 ### Configuration
@@ -283,9 +297,8 @@ spring.encon:
     short-name: true
     cookie: secret
     protocol: TCP
-    version:
-      low: R4
-      high: R6
+    low-version: R4
+    high-version: R6
     distribution-flags:
       - MAP_TAG
       - BIG_CREATION
@@ -301,9 +314,8 @@ spring.encon:
       type: R3_HIDDEN
       cookie: non-secret
       protocol: SCTP
-      version:
-        low: R5C
-        high: R6
+      low-version: R5C
+      high-version: R6
       distribution-flags:
         - EXTENDED_REFERENCES
         - EXTENDED_PIDS_PORTS

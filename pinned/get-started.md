@@ -22,7 +22,7 @@ Adding encon's dependency to your `JVM` app:
   <dependency>
     <groupId>io.appulse.encon</groupId>
     <artifactId>encon</artifactId>
-    <version>1.6.1</version>
+    <version>1.6.2</version>
   </dependency>
   ...
 </dependencies>
@@ -31,7 +31,7 @@ Adding encon's dependency to your `JVM` app:
 **Gradle**:
 
 ```groovy
-compile 'io.appulse.encon:encon:1.6.1'
+compile 'io.appulse.encon:encon:1.6.2'
 ```
 
 ## Start the Node
@@ -45,7 +45,7 @@ import io.appulse.encon.config.NodeConfig;
 // Creating node's config.
 // For more details - see encon-config project
 NodeConfig config = NodeConfig.builder()
-    .shortNamed(true) // true - for local nodes, false (default) - for remote accessable
+    .shortName(true) // true - for local nodes, false (default) - for remote accessable
     .cookie("secret")
     .build();
 
@@ -132,7 +132,7 @@ public class Main {
 
   public static void main (String[] args) {
     NodeConfig config = NodeConfig.builder()
-        .shortNamed(true)
+        .shortName(true)
         .build();
 
     Node node = Nodes.singleNode("java@localhost", config);
