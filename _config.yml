@@ -10,6 +10,8 @@ email:    appulse.io@gmail.com
 
 twitter_username: appulseprojects
 github_username:  appulse-projects
+gitter_room: appulse-projects/encon
+
 header_pages:
   - pinned/get-started.md
   - pinned/advanced-usage.md
