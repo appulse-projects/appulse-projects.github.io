@@ -9,7 +9,7 @@
       <div class="footer-col footer-col-1">
         <ul class="social-media-list">
           {%- if site.github_username -%}<li><a href="https://github.com/{{ site.github_username| cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}"></use></svg> <span class="username">GitHub</span></a></li>{%- endif -%}
-          {%- if site.gitter_room -%}<li><a href="https://gitter.im/{{ site.gitter_room| cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/additional-social-icons.svg#gitter' | relative_url }}"></use></svg> <span class="username">Gitter</span></a></li>{%- endif -%}
+          {%- if site.gitter_room -%}<li><a href="https://gitter.im/{{ site.gitter_room| escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/additional-social-icons.svg#gitter' | relative_url }}"></use></svg> <span class="username">Gitter</span></a></li>{%- endif -%}
         </ul>
       </div>
 
