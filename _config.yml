@@ -11,6 +11,8 @@ email:    appulse.io@gmail.com
 twitter_username: appulseprojects
 github_username:  appulse-projects
 gitter_room: appulse-projects/encon
+disqus:
+  shortname: appulse-io
 
 header_pages:
   - pinned/get-started.md

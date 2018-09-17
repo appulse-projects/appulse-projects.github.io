@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Encon vs Jinterface benchmarks
+comments: true
 ---
 
 The main purpose of the [JMH](http://openjdk.java.net/projects/code-tools/jmh/) tests below is to compare the `Ericsson`'s [jinterface](http://erlang.org/doc/apps/jinterface/jinterface_users_guide.html) package and `Appulse` [encon](https://github.com/appulse-projects/encon-java) library.

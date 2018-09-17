@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Encon library basic concepts overview
+comments: true
 ---
 
 The [encon](https://github.com/appulse-projects/encon-java/tree/master/encon) library provides a set of tools for communication with Erlang processes. It can also be used for communication with other Java processes using the same library, as well as C processes using the special library.
