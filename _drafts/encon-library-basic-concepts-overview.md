@@ -26,7 +26,7 @@ In the following sections, these topics are described:
 - [Remote procedure calls](#remote-procedure-calls)
 - [Tracing](#tracing)
 
-# Mapping of basic Erlang types to Java
+## Mapping of basic Erlang types to Java
 
 This section describes the mapping of Erlang basic types to Java.
 
@@ -44,13 +44,13 @@ This section describes the mapping of Erlang basic types to Java.
 | map                  | [ErlangMap](https://github.com/appulse-projects/encon-java/blob/master/encon-terms/src/main/java/io/appulse/encon/terms/type/ErlangMap.java)             |
 | term                 | [ErlangTerm](https://github.com/appulse-projects/encon-java/blob/master/encon-terms/src/main/java/io/appulse/encon/terms/ErlangTerm.java)                |
 
-# Special mapping issues
+## Special mapping issues
 
 The atoms `true` and `false` are special atoms, used as boolean values. The class [ErlangAtom](https://github.com/appulse-projects/encon-java/blob/master/encon-terms/src/main/java/io/appulse/encon/terms/type/ErlangAtom.java#L138) can be used to represent these.
 
 Lists in Erlang are also used to describe sequences of printable characters (strings). A convenience class [ErlangString](https://github.com/appulse-projects/encon-java/blob/master/encon-terms/src/main/java/io/appulse/encon/terms/type/ErlangString.java) is provided to represent Erlang strings.
 
-# Nodes
+## Nodes
 
 A node as defined by Erlang/OTP is an instance of the Erlang Runtime System, a virtual machine roughly equivalent to a JVM. Each node has a unique name in the form of an identifier composed partly of the hostname on which the node is running, e.g "popa@appulse.io". Several such nodes can run on the same host as long as their names are unique. The class [Node](https://github.com/appulse-projects/encon-java/blob/master/encon/src/main/java/io/appulse/encon/Node.java) represents an Erlang node. It is created with a name and optionally a port number on which it listens for incoming connections. Before creating an instance of `Node`, ensure that `Epmd` is running on the host machine. You can you Appulse's Java implementation of [Epmd](https://github.com/appulse-projects/epmd-java/blob/master/server/README.md) server. See the Erlang documentation for more information about `Epmd`.
 
@@ -64,7 +64,7 @@ import io.appulse.encon.Nodes;
 Node node = Nodes.singleNode("popa");
 ```
 
-# Mailboxes
+## Mailboxes
 
 Erlang processes running on an Erlang node are identified by process identifiers (pids) and, optionally, by registered names unique within the node. Each Erlang process has an implicit mailbox that is used to receive messages; the mailbox is identified with the pid of the process.
 
@@ -105,7 +105,7 @@ node.register(mailbox, "my_process_name");
 
 Registered names are usually necessary in order to start communication, since it is impossible to know in advance the pid of a remote process. If a well-known name for one of the processes is chosen in advance and known by all communicating parties within an application, each mailbox can send an initial message to the named mailbox, which then can identify the sender pid.
 
-# Connections
+## Connections
 
 It is not necessary to explicitly set up communication with a remote node. Simply sending a message to a mailbox on that node will cause the `Node` to create a connection if one does not already exist. Once the connection is established, subsequent messages to the same node will reuse the same connection.
 
@@ -125,7 +125,7 @@ Connections are only permitted by nodes using the same security cookie. The cook
 
 Connections are never broken explicitly. If a node fails or is closed, a connection may be broken however.
 
-# Sending and receiving messages
+## Sending and receiving messages
 
 Messages sent with this package must be instances of [ErlangTerm](https://github.com/appulse-projects/encon-java/blob/master/encon-terms/src/main/java/io/appulse/encon/terms/ErlangTerm.java) or one of its subclasses. Message can be sent to processes or pids, either by specifying the pid of the remote, or its registered name and node.
 
@@ -196,7 +196,7 @@ while (true) {
 
 In the examples above, only one mailbox was created on each node. however you are free to create as many mailboxes on each node as you like. You are also free to create as many nodes as you like on each JVM, however because each node uses some limited system resources such as file descriptors, it is recommended that you create only a small number of nodes (such as one) on each JVM.
 
-# Sending arbitrary data
+## Sending arbitrary data
 
 This library was originally intended to be used for communicating between Java and Erlang, and for that reason the send and receive methods all use Java representations of Erlang data types.
 
@@ -230,7 +230,7 @@ if (term.isBinary()) {
 
 If you want to serialize/deserialize your `POJO`s not only between Java processes, you should to use [encon-databind](https://appulse.io/pinned/advanced-usage.html#databinding) extension.
 
-# Linking to remote processes
+## Linking to remote processes
 
 Erlang defines a concept known as linked processes. A link is an implicit connection between two processes that causes an exception to be raised in one of the processes if the other process terminates for any reason. Links are bidirectional: it does not matter which of the two processes created the link or which of the linked processes eventually terminates; an exception will be raised in the remaining process. Links are also idempotent: at most one link can exist between two given processes, only one operation is necessary to remove the link.
 
@@ -261,7 +261,7 @@ try {
 
 When a mailbox is explicitly closed, exit messages will be sent in order to break any outstanding links.
 
-# Using EPMD
+## Using EPMD
 
 Epmd is the Erlang Port Mapper Daemon. Distributed Erlang nodes register with epmd on the localhost to indicate to other nodes that they exist and can accept connections. Epmd maintains a register of node and port number information, and when a node wishes to connect to another node, it first contacts epmd in order to find out the correct port number to connect to.
 
@@ -275,7 +275,7 @@ Be aware that on some systems (such as VxWorks), a failed node will not be detec
 
 This will cause epmd to close the connection from the far end. Note that if the name was in fact still in use by a node, the results of this operation are unpredictable. Also, doing this does not cause the local end of the connection to close, so resources may be consumed.
 
-# Remote procedure calls
+## Remote procedure calls
 
 An Erlang node acting as a client to another Erlang node typically sends a request and waits for a reply. Such a request is included in a function call at a remote node and is called a remote procedure call.
 
@@ -291,7 +291,7 @@ ErlangTerm response = mailbox.receiveRemoteProcedureResult();
 
 > **IMPORTANT:** Note that this method has unpredicatble results if the remote node is not an `Erlang`/`Elixir` node. If you want to call remote procedures of another `Java` node, you need to create **rex** mailbox by yourself.
 
-# Tracing
+## Tracing
 
 Communication between nodes can be traced by setting an `Encon` and `Netty` log levels, like this:
 
