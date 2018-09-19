@@ -45,6 +45,39 @@ This section describes the mapping of Erlang basic types to Java.
 | map                  | [ErlangMap](https://github.com/appulse-projects/encon-java/blob/master/encon-terms/src/main/java/io/appulse/encon/terms/type/ErlangMap.java)             |
 | term                 | [ErlangTerm](https://github.com/appulse-projects/encon-java/blob/master/encon-terms/src/main/java/io/appulse/encon/terms/ErlangTerm.java)                |
 
+Also, there are many static function helpers at `io.appulse.encon.terms.Erlang` utility class, just compare the following examples:
+
+```java
+import io.appulse.encon.terms.ErlangTerm;
+import io.appulse.encon.terms.type.ErlangAtom;
+import io.appulse.encon.terms.type.ErlangBitString;
+import io.appulse.encon.terms.type.ErlangInteger;
+import io.appulse.encon.terms.type.ErlangTuple;
+
+
+ErlangTerm message = new ErlangTuple(
+    new ErlangAtom("ok"),
+    new ErlangInteger(42),
+    new ErlangBitString("value")
+);
+```
+
+The code sample above equals to the code below:
+
+```java
+import static io.appulse.encon.terms.Erlang.atom;
+import static io.appulse.encon.terms.Erlang.bstring;
+import static io.appulse.encon.terms.Erlang.number;
+import static io.appulse.encon.terms.Erlang.tuple;
+
+import io.appulse.encon.terms.ErlangTerm;
+
+
+ErlangTerm message = tuple(atom("ok"), number(42), bstring("value"));
+```
+
+> **IMPORTANT:** In some cases, `Erlang.*` functions could use cached value, instead of creating a new term. It may be useful for repeatable values like atoms and numbers.
+
 ## Special mapping issues
 
 The atoms `true` and `false` are special atoms, used as boolean values. The class [ErlangAtom](https://github.com/appulse-projects/encon-java/blob/master/encon-terms/src/main/java/io/appulse/encon/terms/type/ErlangAtom.java#L138) can be used to represent these.
